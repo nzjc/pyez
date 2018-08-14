@@ -1,0 +1,35 @@
+---
+
+## IGMP Interface Table
+
+IGMPInterfaceTable:
+  rpc: get-igmp-interface-information
+  item: mgm-interface
+  view: IGMPInterfaceView
+
+IGMPInterfaceView:
+  fields:
+    name: interface-name
+    querier_address: querier-address
+    state: mgm-interface-state
+    igmp_version: { mgm-interface-version : int }
+    group_count: { mgm-group-count : int }
+    immediate_leave: mgm-immediate-leave
+    promiscuous_mode: mgm-promiscuous-mode
+    passive_mode: mgm-passive
+
+
+## IGMP Group Table
+
+IGMPGroupTable:
+  rpc: get-igmp-group-information
+  item: mgm-interface-groups
+  view: IGMPGroupView
+
+IGMPGroupView:
+  fields:
+    name: interface-name
+    group_count: { mgm-group-count : int }
+    group_address: mgm-group/multicast-group-address
+    group_source: mgm-group/multicast-source-address
+    group_type: mgm-group/mgm-type

@@ -1,0 +1,39 @@
+
+
+---
+
+## PIM Interface Table
+
+PIMInterfaceTable:
+  rpc: get-pim-interfaces-information
+  item: pim-interface
+  view: PIMInterfaceView
+
+PIMInterfaceView:
+  fields:
+    interface_name: pim-interface-name
+    status: status
+#    interface_mode: pim-interface-mode-abbreviation ## test this
+    ip_version: { ip-protocol-version : int }
+    pim_version: { protocol-version : int }
+#    interface_states: interface-state ## needs expansion
+    neighbour_count: { neighbor-count : int }
+    sg_joins: { interface-join-sg-count : int }
+    tsg_joins: { interface-join-tsg-count : int }
+    dr_address: designated-router-address
+
+
+## PIM Neighbor Table
+
+PIMNeighborTable:
+  rpc: get-pim-neighbors-information
+  item: pim-interface/pim-neighbor
+  key: pim-neighbor-address
+  view: PIMNeighborView
+
+PIMNeighborView:
+  fields:
+    interface_name: pim-interface-name
+    ip_version: { ip-protocol-version : int }
+    pim_version: { protocol-version : int }
+    pim_mode: pim-interface-mode

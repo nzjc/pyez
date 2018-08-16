@@ -1,5 +1,3 @@
-
-
 ---
 
 ## PIM Interface Table
@@ -16,7 +14,7 @@ PIMInterfaceView:
 #    interface_mode: pim-interface-mode-abbreviation ## test this
     ip_version: { ip-protocol-version : int }
     pim_version: { protocol-version : int }
-#    interface_states: interface-state ## needs expansion
+#    interface_states: interface-state ## needs expansion, use flags
     neighbour_count: { neighbor-count : int }
     sg_joins: { interface-join-sg-count : int }
     tsg_joins: { interface-join-tsg-count : int }
@@ -36,4 +34,20 @@ PIMNeighborView:
     interface_name: pim-interface-name
     ip_version: { ip-protocol-version : int }
     pim_version: { protocol-version : int }
-    pim_mode: pim-interface-mode
+
+## PIM RPS Table
+
+PIMRPSTable:
+  rpc: get-pim-rps-information
+  item: rp-family/rendezvous-point
+  key: rendezvous-point-address
+  view: PIMRPSView
+
+PIMRPSView:
+  fields:
+    address: rendezvous-point-address
+    static_flag: { rp-flag-static : flag }
+    sparse_flag: { rp-flag-sparse : flag }
+    bootstrap_flag: { rp-flag-bootstrap : flag }
+    family: ../address-family
+    group_prefix: rendezvous-point-group-prefixes/multicast-group-prefix

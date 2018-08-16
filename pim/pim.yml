@@ -56,7 +56,7 @@ PIMRPSView:
 
 PIMStatsTable:
   rpc: get-pim-statistics-information
-  item: pim-statistic
+  item: pim-statistics-all/pim-statistics-global/pim-statistic
   key: statistic-name
   view: PIMStatsView
 

@@ -51,3 +51,18 @@ PIMRPSView:
     bootstrap_flag: { rp-flag-bootstrap : flag }
     family: ../address-family
     group_prefix: rendezvous-point-group-prefixes/multicast-group-prefix
+    
+## PIM Statistics
+
+PIMStatsTable:
+  rpc: get-pim-statistics-information
+  item: pim-statistic
+  key: statistic-name
+  view: PIMStatsView
+
+PIMStatsView:
+  fields:
+    rx: { received-count : int }
+    tx: { sent-count : int }
+    er: { error-count : int }
+

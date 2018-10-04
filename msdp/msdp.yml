@@ -1,0 +1,20 @@
+
+---
+### James Burnett - GEANT 2018
+### ------------------------------------------------------
+### show msdp source-active
+### ------------------------------------------------------
+
+MSDPSATable:
+  rpc: get-msdp-source-active-information
+  item: msdp-instance/msdp-route
+  key: multicast-group-address
+  view: MSDPSAView
+
+MSDPSAView:
+  fields:
+    mcast_grp: multicast-group-address
+    mcast_src: multicast-source-address
+    msdp_peer: msdp-route-peer/msdp-peer-address
+    msdp_origin: msdp-route-peer/msdp-originator
+    msdp_accept: {  msdp-route-peer/msdp-route-peer-flags/msdp-accept : flag }

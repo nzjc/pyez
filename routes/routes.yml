@@ -1,0 +1,93 @@
+---
+
+### ------------------------------------------------------
+### show route <destination>
+### ------------------------------------------------------
+
+###
+### I believe there is a bug in Junos XML, receive-protocol-name / advertising-protocol-name don't seem to work properly
+### This is mentioned here: https://forums.juniper.net/t5/Junos-Automation-Scripting/execute-run-show-advertising-protocol-bgp-lt-neighbor-gt-using/td-p/182223
+###
+
+RouteTable:
+  rpc: get-route-information
+  args_key: destination
+  args:
+    protocol: receive-protocol-name
+    peer: peer
+    table: table
+  item: route-table/rt
+  key: rt-destination
+  view: RouteTableView
+
+RouteTableView:
+  groups:
+    entry: rt-entry
+  fields:
+    address_prefix: rt-destination
+  fields_entry:
+    # fields taken from the group 'entry'
+    protocol: protocol-name
+    via: nh/via | nh/nh-local-interface
+    age: { age/@seconds : int }
+    nexthop: nh/to
+    metric: metric
+    nh_type: nh-type
+    as_path: as-path
+    rt_table: ../../table-name
+
+### ------------------------------------------------------
+### show route summary
+### ------------------------------------------------------
+
+RouteSummaryTable:
+  rpc: get-route-summary-information
+  item: route-table
+  key: table-name
+  view: RouteSummaryView
+
+RouteSummaryView:
+  fields:
+    dests: { destination-count : int }
+    total: { total-route-count : int }
+    active: { active-route-count : int }
+    holddown: { holddown-route-count : int }
+    hidden: { hidden-route-count : int }
+    proto: _rspTable
+
+_rspTable:
+  item: protocols
+  key: protocol-name
+  view: _rspView
+
+_rspView:
+  fields:
+    count: { protocol-route-count: int }
+    active: { active-route-count : int }
+
+
+### ------------------------------------------------------
+### show route table
+### ------------------------------------------------------
+### This is a hopefully improved version of RouteTable that wont break things I did earlier
+
+BetterRouteTable:
+  rpc: get-route-information
+  #args:
+    #advertising-protocol-name: 'bgp'
+  args_key:
+    protocol: protocol
+    table: table
+    destination: destination
+    advertising_protocol_name: advertising-protocol-name
+    receive_protocol_name: receive-protocol-name
+    neighbor: neighbor
+    peer: peer
+  item: route-table
+  key: table-name
+  view: BetterRouteTableView
+
+BetterRouteTableView:
+  fields:
+    route: rt/rt-destination
+    as_path: rt/as-path

@@ -89,5 +89,6 @@ BetterRouteTable:
 
 BetterRouteTableView:
   fields:
+    total_rts: destination-count
     route: rt/rt-destination
     as_path: rt/as-path

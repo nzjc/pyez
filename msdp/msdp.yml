@@ -1,4 +1,3 @@
-
 ---
 ### James Burnett - GEANT 2018
 ### ------------------------------------------------------
@@ -18,3 +17,41 @@ MSDPSAView:
     msdp_peer: msdp-route-peer/msdp-peer-address
     msdp_origin: msdp-route-peer/msdp-originator
     msdp_accept: {  msdp-route-peer/msdp-route-peer-flags/msdp-accept : flag }
+
+
+###
+### show msdp statistics
+###
+
+MSDPStatsTable:
+  rpc: get-msdp-statistics-information
+  item: msdp-instance/msdp-peer-statistics
+  key: msdp-peer-address
+  view: MSDPStatsView
+
+MSDPStatsView:
+  fields:
+    peer_address: msdp-peer-address
+    state_change_abs: msdp-state-change-absolute
+    state_change_sec: msdp-state-change
+    msg_rec_abs: msdp-message-received-absolute
+    msg_rec_sec: msdp-message-received
+    rpf_failures: msdp-rpf-failures
+    remote_closes: msdp-remote-closes
+    peer_timeouts: msdp-peer-timeouts
+    sa_msg_sent: msdp-sa-messages-sent
+    sa_msg_rec: msdp-sa-messages-received
+    sa_req_sent: msdp-sa-requests-sent
+    sa_req_rec: msdp-sa-requests-received
+    sa_response_sent: msdp-sa-responses-sent
+    sa_response_rec: msdp-sa-responses-received
+    active_src_exceeded: msdp-active-source-limit-exceeded
+    active_src_max: msdp-active-source-limit-maximum
+    active_src_thold: msdp-active-source-limit-threshold
+    actice_src_log_warn: msdp-active-source-limit-log-warning
+    keepalives_sent: msdp-keepalives-sent
+    keepalives_rec: msdp-keepalives-received
+    unknowns_rec: msdp-unknowns-received
+    sa_zero_rec: msdp-sa-zero-entry-received
+    errors_rec: msdp-errors-received
+
